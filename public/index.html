@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Did The Avs Win?</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url(imgs/avalanche_bg.png);
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+</style>
+</head>
+<body>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div id="prevGame"></div>
+  <div id="nextGame"></div>
+  </div>
+  <div class="w3-display-middle">
+    <h1 id="result" class="w3-jumbo w3-animate-top w3-text-white"></h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <p class="w3-large w3-center"></p>
+  </div>
+  <div class="w3-display-bottomleft w3-padding-large">
+    Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
+  </div>
+</div>
+
+<script>
+fetch('/status')
+  .then(response => {
+  if (!response.ok) {
+    throw new Error('Network response was not ok'); 
+  } return response.json();
+})
+  .then(data => {
+    const prevGameDiv = document.getElementById('prevGame');
+    const nextGameDiv = document.getElementById('nextGame');
+    const resultHeading = document.getElementById('result');
+
+    prevGameDiv.innerHTML = `<p>Previous Game: ${data.responseData.prevGame.gameDate}</p>`;
+    nextGameDiv.innerHTML = `<p>Next Game: ${data.responseData.nextGame.gameDate}</p>`;
+    resultHeading.innerText = `Result: ${data.responseData.resultString}`;
+  })
+  .catch(error => console.error('Error fetching game data:', error));
+  </script>
+</script>
+
+
+</body>
+</html>
