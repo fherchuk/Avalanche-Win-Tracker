@@ -14,4 +14,12 @@ async function getTeamName(teamID) {
   }
 }
 
-module.exports = { getTeamName };
+async function getOpponentId(game) {
+  if (game.awayTeam.id != 21) {
+    return game.awayTeam.id;
+  } else {
+    return game.homeTeam.id;
+  }
+}
+
+module.exports = { getTeamName, getOpponentId };

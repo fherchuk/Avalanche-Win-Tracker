@@ -1,6 +1,7 @@
 // routes.js
-const { getGameData, getGameResult } = require("./gameData");
 const path = require("path");
+const { getGameData, getGameResult } = require("./gameData");
+const { getTeamName, getOpponentId } = require("./teamData");
 
 function setupRoutes(app) {
   app.get("/", (request, response) => {
@@ -11,13 +12,13 @@ function setupRoutes(app) {
     try {
       const { prevGame, nextGame } = await getGameData();
       const resultString = await getGameResult(prevGame);
+      const nextTeam = await getTeamName(await getOpponentId(nextGame));
       const responseData = {
         prevGame,
         nextGame,
         resultString,
+        nextTeam,
       };
-      console.log(responseData);
-
       response.json({ responseData }); // Send JSON data
     } catch (error) {
       console.error("Error fetching game data:", error);
