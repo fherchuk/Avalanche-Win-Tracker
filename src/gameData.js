@@ -50,7 +50,7 @@ async function getGameResult(game) {
 async function resultString(result, game) {
   const last = game.gameOutcome.lastPeriodType;
   const oppTeamName = await getTeamName(game.awayTeam.id);
-  return `The Colorado Avalanche ${result} ${game.homeTeam.score} - ${game.awayTeam.score} against the ${oppTeamName} in ${lastPeriod[last]} on ${game.gameDate}`;
+  return `The Colorado Avalanche ${result} (${game.homeTeam.score}-${game.awayTeam.score}) against the ${oppTeamName} in ${lastPeriod[last]} on ${game.gameDate}`;
 }
 
 module.exports = { getGameData, getGameResult };

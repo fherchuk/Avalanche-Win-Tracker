@@ -10,26 +10,37 @@
 body,h1 {font-family: "Raleway", sans-serif}
 body, html {height: 100%}
 .bgimg {
-  background-image: url(imgs/avalanche_bg.png);
+  background-image: url(imgs/bg_img.jpg);
+
   min-height: 100%;
   background-position: center;
   background-size: cover;
+}
+.image-container {
+  display: flex; /* Use flexbox to align items horizontally */
+}
+
+.image-container img {
+  max-width: 50%; /* Each image takes up half of the container width */
+  height: auto; /* Maintain aspect ratio */
 }
 </style>
 </head>
 <body>
 
-<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-  <div id="prevGame"></div>
-  <div id="nextGame"></div>
-  </div>
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white"></div>
   <div class="w3-display-middle">
-    <h1 id="result" class="w3-jumbo w3-animate-top w3-text-white"></h1>
+    <h1 id="header" class="w3-jumbo w3-animate-top w3-text-white w3-center"></h1>
+    <div class="image-container">
+      <img id="homeTeam" alt="First Image">
+      <img id="awayTeam" alt="Second Image">
+  </div>
     <hr class="w3-border-grey" style="margin:auto;width:40%">
-    <p class="w3-large w3-center"></p>
+    <p id="result" class="w3-large w3-center w3-text-white "></p>
+    <p id="nextGame" class="w3-large w3-center w3-text-white"></p>
   </div>
   <div class="w3-display-bottomleft w3-padding-large">
-    Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
+    Image by rawpixel.com on Freepik <a href="Image by rawpixel.com on Freepik" target="_blank">w3.css</a>
   </div>
 </div>
 
@@ -44,15 +55,24 @@ fetch('/status')
     const prevGameDiv = document.getElementById('prevGame');
     const nextGameDiv = document.getElementById('nextGame');
     const resultHeading = document.getElementById('result');
+    
+    
+    const nextTeam = document.getElementById('nextTeam')
+    const home = document.getElementById('homeTeam');
+    const away = document.getElementById('awayTeam');
 
-    prevGameDiv.innerHTML = `<p>Previous Game: ${data.responseData.prevGame.gameDate}</p>`;
-    nextGameDiv.innerHTML = `<p>Next Game: ${data.responseData.nextGame.gameDate}</p>`;
-    resultHeading.innerText = `Result: ${data.responseData.resultString}`;
+
+
+
+    nextGameDiv.innerHTML = `<p>Next Game: ${data.responseData.nextGame.gameDate} vs. ${data.responseData.nextTeam}</p>`;
+    resultHeading.innerText = data.responseData.resultString;
+    
+    home.src = data.responseData.prevGame.homeTeam.logo;
+    away.src = data.responseData.prevGame.awayTeam.logo;
+
+
   })
   .catch(error => console.error('Error fetching game data:', error));
   </script>
-</script>
-
-
 </body>
 </html>
