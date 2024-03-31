@@ -1,0 +1,68 @@
+/* Combined Custom CSS */
+
+/* Resetting default margin and padding */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Background image */
+  .bgimg {
+    background-image: url(imgs/bg_img.jpg);
+    min-height: 100vh;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Header style */
+  h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+  }
+  
+  /* Image container and images */
+  .image-container {
+    display: flex;
+    justify-content: center; /* Distribute images evenly */
+    margin: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .image-container img {
+    width: calc(33.33% - 10px); /* Adjusted width for each image with smaller margin */
+    height: auto;
+    margin: 0 0.5px; /* Reduced margin between images */
+  }
+  
+  /* Result text */
+  .result{
+    font-size: 24px;
+  }
+  
+  /* Next game text */
+  .next-game-text {
+    font-size: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* Bottom left attribution */
+  .bottom-left {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+  }
+  
+  /* Inline style for horizontal rule */
+  hr {
+    border-color: grey;
+    margin: auto;
+    width: 40%;
+  }
+  
