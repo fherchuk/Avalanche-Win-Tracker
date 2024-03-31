@@ -1,78 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Did The Avs Win?</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<style>
-body,h1 {font-family: "Raleway", sans-serif}
-body, html {height: 100%}
-.bgimg {
-  background-image: url(imgs/bg_img.jpg);
+  <head>
+    <title>Did The Avs Win?</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Include custom CSS file -->
 
-  min-height: 100%;
-  background-position: center;
-  background-size: cover;
-}
-.image-container {
-  display: flex; /* Use flexbox to align items horizontally */
-}
+    <style></style>
+  </head>
+  <body>
+    <div class="bgimg">
+      <div>
+        <h1>Did The Avs Win?</h1>
+        <div class="image-container">
+          <img id="homeTeam" alt="First Image" />
+          <!-- Adjusted image source and added alt text -->
+          <img src="imgs/vs.png" />
+          <!-- Adjusted image source and added alt text -->
+          <img id="awayTeam" alt="Third Image" />
+          <!-- New third image with alt text -->
+        </div>
+        <p id="result" class="result"></p>
+        <hr style="border-color: grey; margin: auto; width: 40%;" />
+        <p id="result" class="result"></p>
+        <!-- Added placeholder text for the result -->
+        <p id="nextGame"></p>
+        <!-- Added placeholder text for the next game -->
+        <img id="nextTeam" alt="Next" />
+      </div>
+      <div class="bottom-left">
+        Image by rawpixel.com on Freepik
+        <a href="https://www.freepik.com/photos/background" target="_blank"
+          >Freepik</a
+        >
+      </div>
+    </div>
 
-.image-container img {
-  max-width: 50%; /* Each image takes up half of the container width */
-  height: auto; /* Maintain aspect ratio */
-}
-</style>
-</head>
-<body>
-
-<div class="bgimg w3-display-container w3-animate-opacity w3-text-white"></div>
-  <div class="w3-display-middle">
-    <h1 id="header" class="w3-jumbo w3-animate-top w3-text-white w3-center"></h1>
-    <div class="image-container">
-      <img id="homeTeam" alt="First Image">
-      <img id="awayTeam" alt="Second Image">
-  </div>
-    <hr class="w3-border-grey" style="margin:auto;width:40%">
-    <p id="result" class="w3-large w3-center w3-text-white "></p>
-    <p id="nextGame" class="w3-large w3-center w3-text-white"></p>
-  </div>
-  <div class="w3-display-bottomleft w3-padding-large">
-    Image by rawpixel.com on Freepik <a href="Image by rawpixel.com on Freepik" target="_blank">w3.css</a>
-  </div>
-</div>
-
-<script>
-fetch('/status')
-  .then(response => {
-  if (!response.ok) {
-    throw new Error('Network response was not ok'); 
-  } return response.json();
-})
-  .then(data => {
-    const prevGameDiv = document.getElementById('prevGame');
-    const nextGameDiv = document.getElementById('nextGame');
-    const resultHeading = document.getElementById('result');
-    
-    
-    const nextTeam = document.getElementById('nextTeam')
-    const home = document.getElementById('homeTeam');
-    const away = document.getElementById('awayTeam');
-
-
-
-
-    nextGameDiv.innerHTML = `<p>Next Game: ${data.responseData.nextGame.gameDate} vs. ${data.responseData.nextTeam}</p>`;
-    resultHeading.innerText = data.responseData.resultString;
-    
-    home.src = data.responseData.prevGame.homeTeam.logo;
-    away.src = data.responseData.prevGame.awayTeam.logo;
-
-
-  })
-  .catch(error => console.error('Error fetching game data:', error));
-  </script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
