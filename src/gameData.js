@@ -46,7 +46,7 @@ async function fetchPrevGameData() {
         game.awayTeam.score
       }) against the ${opponentName} in ${
         lastPeriod[game.gameOutcome.lastPeriodType]
-      } on ${game.gameDate}`
+      } on ${parseDate(game.gameDate)}`
     : `The Colorado Avalanche are currently ${status.status} against the ${opponentName} in ${game.venue.default}`;
 
   return { homeLogo: game.homeTeam.logo, awayLogo: game.awayTeam.logo, result };
@@ -60,7 +60,9 @@ async function fetchNextGameData() {
 
   const opponent = await getOpponent(game);
   const opponentName = await getTeam(opponent.id);
-  const text = `Next Game: ${game.gameDate} vs ${opponentName} at ${game.venue.default}`;
+  const text = `Next Game: ${parseDate(game.gameDate)} vs ${opponentName} at ${
+    game.venue.default
+  }`;
   const logo = opponent.logo;
 
   return { text, logo };
@@ -91,6 +93,23 @@ function getGameStatus(game) {
     : "Lost";
 
   return { status, isLive };
+}
+
+function parseDate(dateStr) {
+  const date = new Date(`${dateStr}T15:00:00.000Z`);
+  const options = {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    daySuffix: ["st", "nd", "rd", "th"],
+  };
+
+  const day = date.getUTCDate();
+  const suffix = options.daySuffix[(day - 1) % 10] || options.daySuffix[3];
+  const formattedDate = date
+    .toLocaleDateString("en-US", options)
+    .replace(day.toString(), day + suffix);
+  return formattedDate;
 }
 
 module.exports = { fetchPrevGameData, fetchNextGameData };
