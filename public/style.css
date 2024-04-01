@@ -19,11 +19,23 @@ body {
     text-align: center;
     color: white;
   }
-  
-  /* Header style */
-  h1 {
+  .header{
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Align items vertically */
+  }
+
+  .header h1{
     font-size: 3em;
-    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+  }
+  .header p {
+    font-size: 6em;
+    margin-top: 0px;
+    margin-bottom: 5px;
+
   }
   
   /* Image container and images */
@@ -45,10 +57,20 @@ body {
     font-size: 24px;
   }
   
-  /* Next game text */
-  .next-game-text {
-    font-size: 5px;
+  .next-game-container{
+    display: flex;
+    justify-content: center; 
+    margin: 20px;
     margin-bottom: 20px;
+  }
+  /* Next game text */
+  .next-game-container img {
+    width: 100px; /* Adjust this value to change the size of the image */
+    height: auto; /* Maintain aspect ratio */
+  }
+  .next-game-container p{
+    font-size: 20px;
+    text-justify: auto;
   }
   
   /* Bottom left attribution */

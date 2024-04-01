@@ -12,7 +12,11 @@ fetch("/status")
 
     // Update DOM elements with fetched data
     document.getElementById("nextGame").innerText = nextGameData.text;
-    document.getElementById("result").innerText = prevGameData.result;
+    document.getElementById("result").innerText = prevGameData.resultString;
+
+    const resultHeader = document.getElementById("result-header");
+    resultHeader.innerText = prevGameData.displayStatus[0];
+    resultHeader.style.color = prevGameData.displayStatus[1];
 
     document.getElementById("homeTeam").src = prevGameData.homeLogo;
     document.getElementById("awayTeam").src = prevGameData.awayLogo;
