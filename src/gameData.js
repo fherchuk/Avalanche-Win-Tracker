@@ -7,6 +7,15 @@ const lastPeriod = {
   OT: "Overtime",
   REG: "Regulation",
 };
+
+const display = {
+  Tied: ["Currently Tied", "yellow"],
+  Winning: ["Yes, Currently!", "green"],
+  Losing: ["Not Currently", "red"],
+  Won: ["YES", "green"],
+  Lost: ["NO", "red"],
+};
+
 let fetchedScheduleData;
 const scheduleUrl =
   "https://api-web.nhle.com/v1/club-schedule-season/COL/20232024";
@@ -41,7 +50,7 @@ async function fetchPrevGameData() {
   const opponent = await getOpponent(game);
   const opponentName = await getTeam(opponent.id);
 
-  const result = !status.isLive
+  const resultString = !status.isLive
     ? `The Colorado Avalanche ${status.status} (${game.homeTeam.score}-${
         game.awayTeam.score
       }) against the ${opponentName} in ${
@@ -49,7 +58,12 @@ async function fetchPrevGameData() {
       } on ${parseDate(game.gameDate)}`
     : `The Colorado Avalanche are currently ${status.status} against the ${opponentName} in ${game.venue.default}`;
 
-  return { homeLogo: game.homeTeam.logo, awayLogo: game.awayTeam.logo, result };
+  return {
+    homeLogo: game.homeTeam.logo,
+    awayLogo: game.awayTeam.logo,
+    resultString,
+    displayStatus: display[status.status],
+  };
 }
 
 async function fetchNextGameData() {
